@@ -38,7 +38,7 @@ class SourceAdapter(private val context: Context, private var listSource : List<
             title.text = source.name
             description.text = source.description
             url.text = source.url
-            itemView.setOnClickListener { listener.onClick(source.id) }
+            if (source.id != null) itemView.setOnClickListener { listener.onClick(source.id) }
         }
     }
 

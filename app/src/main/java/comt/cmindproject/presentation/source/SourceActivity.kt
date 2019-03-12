@@ -2,12 +2,13 @@ package comt.cmindproject.presentation.source
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import comt.cmindproject.R
 import comt.cmindproject.model.Source
-import comt.cmindproject.presentation.newsdetail.NewsDetailActivity
+import comt.cmindproject.presentation.newsdetail.NewsListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
@@ -21,6 +22,7 @@ class SourceActivity : AppCompatActivity(), SourceView{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
         presenter.getSources()
     }
 
@@ -44,7 +46,7 @@ class SourceActivity : AppCompatActivity(), SourceView{
 
         sourceAdapter?.setSourceClickItemListener(object : SourceAdapter.OnSourceClickItemListener {
             override fun onClick(newsId: String) {
-                startActivity(Intent(this@SourceActivity,NewsDetailActivity::class.java).apply {
+                startActivity(Intent(this@SourceActivity,NewsListActivity::class.java).apply {
                     this.putExtra("newsId",newsId)
                 })
             }
@@ -52,11 +54,11 @@ class SourceActivity : AppCompatActivity(), SourceView{
     }
 
     override fun showLoading() {
-
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-
+        progressBar.visibility = View.GONE
     }
 
 

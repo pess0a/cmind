@@ -1,6 +1,7 @@
 package comt.cmindproject.di
 
 import comt.cmindproject.infrastructure.BackendIntegrator
+import comt.cmindproject.presentation.newsdetail.NewsListPresenter
 import comt.cmindproject.presentation.source.SourcePresenter
 import comt.cmindproject.repository.NewsRepository
 import comt.cmindproject.repository.api.NewsAPI
@@ -11,6 +12,7 @@ private val newsAPI: NewsAPI = BackendIntegrator.getNewsAPI()
 val newsModule = module {
     factory { NewsRepository(get()) }
     factory { SourcePresenter(get()) }
+    factory { NewsListPresenter(get()) }
 }
 
 val networkModule = module {

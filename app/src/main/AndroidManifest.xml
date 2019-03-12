@@ -14,14 +14,19 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.newsdetail.NewsDetailActivity">
+        <activity android:name=".presentation.newsdetail.NewsListActivity">
         </activity>
-        <activity android:name=".presentation.source.SourceActivity">
+        <activity android:name=".presentation.source.SourceActivity"
+                  android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="comt.cmindproject.presentation.source.SourceActivity"
+                    android:configChanges="orientation|screenSize"/>
         </activity>
     </application>
 
