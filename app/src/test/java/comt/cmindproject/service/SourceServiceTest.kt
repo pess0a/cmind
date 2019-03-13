@@ -1,6 +1,5 @@
-package comt.cmindproject
+package comt.cmindproject.service
 
-import android.util.Log
 import comt.cmindproject.infrastructure.BackendIntegrator
 import comt.cmindproject.infrastructure.CMINDConstants
 import comt.cmindproject.model.SourceResponse
@@ -13,11 +12,10 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
-import org.koin.test.KoinTest
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-class SourceTest {
+class SourceServiceTest {
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
     private var repository = NewsRepository(BackendIntegrator.getNewsAPI())

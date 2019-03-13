@@ -1,4 +1,4 @@
-package comt.cmindproject;
+package comt.cmindproject.di;
 
 import comt.cmindproject.di.networkModule
 import comt.cmindproject.di.newsModule

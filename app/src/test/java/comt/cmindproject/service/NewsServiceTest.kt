@@ -1,24 +1,20 @@
-package comt.cmindproject
+package comt.cmindproject.service
 
-import android.util.Log
 import comt.cmindproject.infrastructure.BackendIntegrator
 import comt.cmindproject.infrastructure.CMINDConstants
 import comt.cmindproject.model.NewsResponse
-import comt.cmindproject.model.SourceResponse
 import comt.cmindproject.repository.NewsRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.koin.test.KoinTest
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-class NewsTest {
+class NewsServiceTest {
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
     private var repository = NewsRepository(BackendIntegrator.getNewsAPI())
@@ -44,7 +40,7 @@ class NewsTest {
     @Test
     fun testResponse() {
         //change the response and you can fail this test
-        assertEquals(CMINDConstants.OK_RESPONSE, newsResponse.status)
+        Assert.assertEquals(CMINDConstants.OK_RESPONSE, newsResponse.status)
     }
 
     @Test
@@ -52,20 +48,20 @@ class NewsTest {
         //change the response and you can fail this test
         val responseClone = newsResponse.copy()
         responseClone.status = CMINDConstants.ERROR_RESPONSE
-        assertEquals(CMINDConstants.ERROR_RESPONSE, responseClone.status)
+        Assert.assertEquals(CMINDConstants.ERROR_RESPONSE, responseClone.status)
     }
 
     @Test
     fun testSourceList() {
         //change the expected and you can fail this test
-        assertEquals(20, newsResponse.articles.size)
+        Assert.assertEquals(20, newsResponse.articles.size)
     }
 
     @Test
     fun testIfSomeTitleIsNull() {
         val responseClone = newsResponse.copy()
         responseClone.articles.forEach {
-            assertNotNull(it.title)
+            Assert.assertNotNull(it.title)
         }
     }
 }

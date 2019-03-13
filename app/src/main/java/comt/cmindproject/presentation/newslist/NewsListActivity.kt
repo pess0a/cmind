@@ -15,7 +15,6 @@ import org.koin.android.ext.android.inject
 class NewsListActivity : AppCompatActivity(), NewsListView {
 
     private val presenter : NewsListPresenter by inject()
-    private var newsListAdapter : NewsListAdapter? = null
     private var layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     private lateinit var newsId : String
 
@@ -55,7 +54,7 @@ class NewsListActivity : AppCompatActivity(), NewsListView {
 
     override fun loadNewsList(listArtcles : List<Article>) {
         textViewError.visibility = View.GONE
-        recyclerViewNews.adapter = NewsListAdapter(this,listArtcles).apply {  newsListAdapter = this}
+        recyclerViewNews.adapter = NewsListAdapter(this,listArtcles)
         recyclerViewNews.layoutManager = layoutManager
     }
 

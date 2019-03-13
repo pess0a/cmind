@@ -15,7 +15,9 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".presentation.newslist.NewsListActivity"
-                  android:configChanges="orientation|screenSize">
+                  android:configChanges="orientation|screenSize"
+                  android:launchMode="singleInstance"
+        >
         </activity>
         <activity android:name=".presentation.source.SourceActivity"
                   android:configChanges="orientation|screenSize">
