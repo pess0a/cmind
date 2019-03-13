@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content" xmlns:tools="http://schemas.android.com/tools"
         android:padding="2dp">
 
     <androidx.cardview.widget.CardView
@@ -27,7 +27,7 @@
                     android:id="@+id/textViewTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Avião cai com 242 passageiros no Recife"
+                    tools:text="Avião cai com 242 passageiros no Recife"
                     android:layout_marginStart="8dp"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -39,7 +39,7 @@
                     android:id="@+id/textViewDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="As 12 horas caiu o aviao dentro do terreno As 12 horas caiu o aviao dentro do terreno As 12 horas caiu o aviao dentro do terreno As 12 horas caiu o aviao dentro do terreno  "
+                    tools:text="As 12 horas caiu o aviao dentro do terreno As 12 horas caiu o aviao dentro do terreno As 12 horas caiu o aviao dentro do terreno As 12 horas caiu o aviao dentro do terreno  "
                     android:layout_marginStart="8dp"
                     android:textSize="16sp"
                     android:textColor="@color/black"
@@ -52,7 +52,7 @@
                     android:id="@+id/textViewUrl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="www.g1.com.br"
+                    tools:text="www.g1.com.br"
                     android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textViewDescription"

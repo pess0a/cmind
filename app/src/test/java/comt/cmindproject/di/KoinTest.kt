@@ -1,7 +1,5 @@
-package comt.cmindproject.di;
+package comt.cmindproject.di
 
-import comt.cmindproject.di.networkModule
-import comt.cmindproject.di.newsModule
 import org.junit.Before
 import org.junit.Test
 import org.koin.standalone.StandAloneContext.startKoin
