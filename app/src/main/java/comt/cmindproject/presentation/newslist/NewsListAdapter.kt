@@ -1,7 +1,6 @@
-package comt.cmindproject.presentation.newsdetail
+package comt.cmindproject.presentation.newslist
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import comt.cmindproject.model.Article
 import kotlinx.android.synthetic.main.item_list_article.view.*
 
 
-class NewsDetailAdapter(private val context: Context, private var listArticle : List<Article>) : Adapter<NewsDetailAdapter.ViewHolder>() {
+class NewsListAdapter(private val context: Context, private var listArticle : List<Article>) : Adapter<NewsListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bindView(listArticle[position])
@@ -26,16 +25,15 @@ class NewsDetailAdapter(private val context: Context, private var listArticle : 
             val description = itemView.textViewDescription
             val publishedDay = itemView.textViewPublished
             val author = itemView.textViewAuthor
-//
-//
+
             title.text = article.title
             description.text = article.description
-            publishedDay.text = article.publishedAt.substring(0,10)
+            publishedDay.text = article.publishedAt?.substring(0,10)
             author.text = article.author
-            Log.i("logger",article.toString())
-            if (article.urlToImage!=null) {
-                ImageHelper.loadImage(article.urlToImage,itemView.imageViewThumbnail)
-            }
+
+            if (article.author.isNullOrBlank()) { author.visibility = View.GONE }
+            if (article.publishedAt.isNullOrBlank()) { publishedDay.visibility = View.GONE }
+            if (!article.urlToImage.isNullOrBlank()) { ImageHelper.loadImage(article.urlToImage,itemView.imageViewThumbnail) }
 
         }
     }

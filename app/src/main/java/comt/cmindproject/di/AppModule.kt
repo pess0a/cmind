@@ -1,7 +1,7 @@
 package comt.cmindproject.di
 
 import comt.cmindproject.infrastructure.BackendIntegrator
-import comt.cmindproject.presentation.newsdetail.NewsListPresenter
+import comt.cmindproject.presentation.newslist.NewsListPresenter
 import comt.cmindproject.presentation.source.SourcePresenter
 import comt.cmindproject.repository.NewsRepository
 import comt.cmindproject.repository.api.NewsAPI

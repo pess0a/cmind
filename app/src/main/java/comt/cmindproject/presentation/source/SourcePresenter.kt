@@ -1,8 +1,6 @@
 package comt.cmindproject.presentation.source
 
-import android.os.Handler
 import comt.cmindproject.infrastructure.CMINDConstants
-import comt.cmindproject.model.Source
 import comt.cmindproject.presentation.base.BasePresenter
 import comt.cmindproject.repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +30,7 @@ class SourcePresenter(private var newsRepository: NewsRepository) : BasePresente
                     else -> view?.errorOnLoadSource()
                 }
             } catch (e: Exception) {
-                //we can handle any exceptions here with more catch//
+                //we can handle any exceptions here with more catch
                 view?.errorOnLoadSource()
                 e.printStackTrace()
             } finally {

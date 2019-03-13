@@ -1,9 +1,7 @@
-package comt.cmindproject.presentation.newsdetail
+package comt.cmindproject.presentation.newslist
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import comt.cmindproject.R
 import kotlinx.android.synthetic.main.activity_news_detail.*
 import android.view.MenuItem
@@ -11,17 +9,15 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import comt.cmindproject.model.Article
-import comt.cmindproject.presentation.source.SourceAdapter
 import org.koin.android.ext.android.inject
 
 
 class NewsListActivity : AppCompatActivity(), NewsListView {
 
     private val presenter : NewsListPresenter by inject()
-    private var newsDetailAdapter : NewsDetailAdapter? = null
+    private var newsListAdapter : NewsListAdapter? = null
     private var layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     private lateinit var newsId : String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +25,10 @@ class NewsListActivity : AppCompatActivity(), NewsListView {
         setSupportActionBar(toolbar)
 
         if (supportActionBar != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setDisplayShowHomeEnabled(true)
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setDisplayShowHomeEnabled(true)
+            }
         }
 
         if(intent.extras!=null) {
@@ -55,13 +53,17 @@ class NewsListActivity : AppCompatActivity(), NewsListView {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun errorOnLoadNews() {
-
+    override fun loadNewsList(listArtcles : List<Article>) {
+        textViewError.visibility = View.GONE
+        recyclerViewNews.adapter = NewsListAdapter(this,listArtcles).apply {  newsListAdapter = this}
+        recyclerViewNews.layoutManager = layoutManager
     }
 
-    override fun loadNewsList(listArtcles : List<Article>) {
-        recyclerViewNews.adapter = NewsDetailAdapter(this,listArtcles).apply {  newsDetailAdapter = this}
-        recyclerViewNews.layoutManager = layoutManager
+    override fun errorOnLoadNews() {
+        textViewError.apply {
+            visibility = View.VISIBLE
+            setOnClickListener { presenter.getNewsById(newsId) }
+        }
     }
 
     override fun showLoading() {

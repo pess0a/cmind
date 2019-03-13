@@ -14,15 +14,7 @@ import kotlinx.android.synthetic.main.item_list_source.view.*
 class SourceAdapter(private val context: Context, private var listSource : List<Source>) : Adapter<SourceAdapter.ViewHolder>() {
 
 
-    private lateinit var listener: OnSourceClickItemListener
-
-    fun setSourceClickItemListener(onSourceClickItemListener: OnSourceClickItemListener){
-        this.listener = onSourceClickItemListener
-    }
-
-    interface OnSourceClickItemListener{
-        fun onClick(newsId: String)
-    }
+    lateinit var listener: OnSourceClickItemListener
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bindView(listSource[position])
@@ -38,7 +30,7 @@ class SourceAdapter(private val context: Context, private var listSource : List<
             title.text = source.name
             description.text = source.description
             url.text = source.url
-            if (source.id != null) itemView.setOnClickListener { listener.onClick(source.id) }
+            if (source.id != null) itemView.setOnClickListener { listener.onClick(source.id!!) }
         }
     }
 
@@ -49,6 +41,18 @@ class SourceAdapter(private val context: Context, private var listSource : List<
     override fun getItemCount(): Int {
         return listSource.size
     }
+
+    interface OnSourceClickItemListener{
+        fun onClick(newsId: String) = Unit
+    }
+
+    inline fun setSourceClickItemListener(crossinline listener: (String) -> Unit) {
+        this.listener = object : OnSourceClickItemListener {
+            override fun onClick(newsId: String) = listener(newsId)
+        }
+    }
+
+
 
 
 }

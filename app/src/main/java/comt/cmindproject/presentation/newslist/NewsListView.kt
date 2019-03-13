@@ -1,4 +1,4 @@
-package comt.cmindproject.presentation.newsdetail
+package comt.cmindproject.presentation.newslist
 
 import comt.cmindproject.model.Article
 import comt.cmindproject.presentation.base.BaseView

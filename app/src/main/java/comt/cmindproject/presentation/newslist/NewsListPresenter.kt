@@ -1,4 +1,4 @@
-package comt.cmindproject.presentation.newsdetail
+package comt.cmindproject.presentation.newslist
 
 import comt.cmindproject.infrastructure.CMINDConstants
 import comt.cmindproject.presentation.base.BasePresenter
@@ -30,7 +30,7 @@ class NewsListPresenter(private var newsRepository: NewsRepository) : BasePresen
                     else -> view?.errorOnLoadNews()
                 }
             } catch (e: Exception) {
-                //we can handle any exceptions here with more catch//
+                //we can handle any exceptions here with more catch
                 view?.errorOnLoadNews()
                 e.printStackTrace()
             } finally {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CMINDProject</string>
+    <string name="unable_to_get_response_from_server">Unable to get response from server\nClick here to retry</string>
 </resources>

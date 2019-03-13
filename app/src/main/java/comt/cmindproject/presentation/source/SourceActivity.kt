@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import comt.cmindproject.R
 import comt.cmindproject.model.Source
-import comt.cmindproject.presentation.newsdetail.NewsListActivity
+import comt.cmindproject.presentation.newslist.NewsListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 
-class SourceActivity : AppCompatActivity(), SourceView{
+class SourceActivity : AppCompatActivity(), SourceView {
 
     private val presenter : SourcePresenter by inject()
     private var sourceAdapter : SourceAdapter? = null
@@ -37,20 +37,22 @@ class SourceActivity : AppCompatActivity(), SourceView{
     }
 
     override fun errorOnLoadSource() {
-
+        textViewError.apply {
+            visibility = View.VISIBLE
+            setOnClickListener { presenter.getSources() }
+        }
     }
 
     override fun loadSourceList(listSource: List<Source>) {
+        textViewError.visibility = View.GONE
         recyclerViewSource.adapter = SourceAdapter(this,listSource).apply {  sourceAdapter = this}
         recyclerViewSource.layoutManager = layoutManager
 
-        sourceAdapter?.setSourceClickItemListener(object : SourceAdapter.OnSourceClickItemListener {
-            override fun onClick(newsId: String) {
-                startActivity(Intent(this@SourceActivity,NewsListActivity::class.java).apply {
-                    this.putExtra("newsId",newsId)
-                })
-            }
-        })
+        sourceAdapter?.setSourceClickItemListener {
+            startActivity(Intent(this@SourceActivity,NewsListActivity::class.java).apply {
+                putExtra("newsId",it)
+            })
+        }
     }
 
     override fun showLoading() {
