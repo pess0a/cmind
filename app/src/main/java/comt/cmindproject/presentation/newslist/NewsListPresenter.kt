@@ -3,7 +3,6 @@ package comt.cmindproject.presentation.newslist
 import android.util.Log
 import comt.cmindproject.infrastructure.CMINDConstants
 import comt.cmindproject.presentation.base.BasePresenter
-import comt.cmindproject.presentation.base.Presenter
 import comt.cmindproject.repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

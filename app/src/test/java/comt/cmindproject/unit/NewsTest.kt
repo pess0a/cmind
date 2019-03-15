@@ -16,8 +16,8 @@ class NewsTest : BaseTest() {
     fun testResponse() {
         runBlocking {
             val newsResponseMock = NewsResponse(arrayListOf(), "ok", 1)
-            `when`(repoMock.getNewsByIdAsync("1")).thenReturn(newsResponseMock.toDeferred())
-            assertEquals(CMINDConstants.OK_RESPONSE, repoMock.getNewsByIdAsync("1").await().status)
+            `when`(repoMock.getNewsByIdAsync("1",1)).thenReturn(newsResponseMock.toDeferred())
+            assertEquals(CMINDConstants.OK_RESPONSE, repoMock.getNewsByIdAsync("1",1).await().status)
         }
     }
 
@@ -26,8 +26,8 @@ class NewsTest : BaseTest() {
         val newsResponseMock = NewsResponse(arrayListOf(), "error", 1)
 
         runBlocking {
-            `when`(repoMock.getNewsByIdAsync("1")).thenReturn(newsResponseMock.toDeferred())
-            assertEquals(CMINDConstants.ERROR_RESPONSE, repoMock.getNewsByIdAsync("1").await().status)
+            `when`(repoMock.getNewsByIdAsync("1",1)).thenReturn(newsResponseMock.toDeferred())
+            assertEquals(CMINDConstants.ERROR_RESPONSE, repoMock.getNewsByIdAsync("1",1).await().status)
 
         }
     }
@@ -44,8 +44,8 @@ class NewsTest : BaseTest() {
         val newsResponseMock = NewsResponse(listArticle, "ok", 1)
 
         runBlocking {
-            `when`(repoMock.getNewsByIdAsync("1")).thenReturn(newsResponseMock.toDeferred())
-            assertEquals(3, repoMock.getNewsByIdAsync("1").await().articles.size)
+            `when`(repoMock.getNewsByIdAsync("1",1)).thenReturn(newsResponseMock.toDeferred())
+            assertEquals(3, repoMock.getNewsByIdAsync("1",1).await().articles.size)
         }
     }
 
@@ -64,7 +64,7 @@ class NewsTest : BaseTest() {
         val newsResponseMock = NewsResponse(listArticle, "ok", 1)
 
         runBlocking {
-            `when`(repoMock.getNewsByIdAsync("1")).thenReturn(newsResponseMock.toDeferred())
+            `when`(repoMock.getNewsByIdAsync("1",1)).thenReturn(newsResponseMock.toDeferred())
             newsResponseMock.articles.forEach {
                 assertNotNull(it.title)
             }

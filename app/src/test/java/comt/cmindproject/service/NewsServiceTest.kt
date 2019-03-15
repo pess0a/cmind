@@ -20,13 +20,14 @@ class NewsServiceTest {
     private var repository = NewsRepository(BackendIntegrator.getNewsAPI())
     private lateinit var newsResponse : NewsResponse
     private val newsId = "abc-news-au"
+    private val page = 1
 
     @Before
     fun setUp() {
         Dispatchers.setMain(mainThreadSurrogate)
         runBlocking {
             launch(Dispatchers.Main) {
-                newsResponse = repository.getNewsByIdAsync(newsId).await()
+                newsResponse = repository.getNewsByIdAsync(newsId,page).await()
             }
         }
     }
@@ -54,7 +55,7 @@ class NewsServiceTest {
     @Test
     fun testSourceList() {
         //change the expected and you can fail this test
-        Assert.assertEquals(20, newsResponse.articles.size)
+        Assert.assertEquals(5, newsResponse.articles.size)
     }
 
     @Test
