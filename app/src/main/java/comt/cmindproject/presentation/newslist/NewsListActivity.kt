@@ -38,13 +38,14 @@ class NewsListActivity : AppCompatActivity(), NewsListView {
     }
 
     override fun onResume() {
-        presenter.subscribe(this)
+        presenter.bind(this)
         super.onResume()
     }
 
     override fun onStop() {
+        presenter.unBind()
         super.onStop()
-        presenter.unSubscribe()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

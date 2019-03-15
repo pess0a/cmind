@@ -1,10 +1,9 @@
 package comt.cmindproject.presentation.newslist
 
 import comt.cmindproject.model.Article
-import comt.cmindproject.presentation.base.BaseView
+import comt.cmindproject.presentation.base.View
 
-interface NewsListView : BaseView {
+interface NewsListView : View {
     fun errorOnLoadNews()
     fun loadNewsList(listArtcles: ArrayList<Article>)
-
 }

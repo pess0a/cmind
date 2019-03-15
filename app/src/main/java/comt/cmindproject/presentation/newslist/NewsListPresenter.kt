@@ -3,23 +3,15 @@ package comt.cmindproject.presentation.newslist
 import android.util.Log
 import comt.cmindproject.infrastructure.CMINDConstants
 import comt.cmindproject.presentation.base.BasePresenter
+import comt.cmindproject.presentation.base.Presenter
 import comt.cmindproject.repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class NewsListPresenter(private var newsRepository: NewsRepository) : BasePresenter<NewsListView> {
+class NewsListPresenter(private var newsRepository: NewsRepository) : BasePresenter<NewsListView>() {
 
-    private var view: NewsListView? = null
     private var PAGE : Int = 1
-
-    override fun subscribe(view: NewsListView) {
-        this.view = view
-    }
-
-    override fun unSubscribe() {
-        this.view = null
-    }
 
     fun getNewsById(newsId: String) {
         GlobalScope.launch(context = Dispatchers.Main) {

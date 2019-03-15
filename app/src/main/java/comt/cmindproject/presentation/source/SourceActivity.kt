@@ -27,12 +27,12 @@ class SourceActivity : AppCompatActivity(), SourceView {
     }
 
     override fun onResume() {
-        presenter.subscribe(this)
+        presenter.bind(this)
         super.onResume()
     }
 
     override fun onStop() {
-        presenter.unSubscribe()
+        presenter.unBind()
         super.onStop()
     }
 

@@ -1,6 +1,15 @@
 package comt.cmindproject.presentation.base
 
-interface BasePresenter<T : BaseView> {
-    fun subscribe(view: T)
-    fun unSubscribe()
+
+open class BasePresenter<V: View> : Presenter<V> {
+
+    var view: V? = null
+
+    override fun bind(view: V) {
+        this.view = view
+    }
+
+    override fun unBind() {
+        this.view = null
+    }
 }

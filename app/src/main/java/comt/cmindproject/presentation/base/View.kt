@@ -1,8 +1,6 @@
 package comt.cmindproject.presentation.base
 
-interface BaseView {
-
+interface View {
     fun showLoading()
     fun hideLoading()
-
 }

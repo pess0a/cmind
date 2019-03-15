@@ -1,9 +1,9 @@
 package comt.cmindproject.presentation.source
 
 import comt.cmindproject.model.Source
-import comt.cmindproject.presentation.base.BaseView
+import comt.cmindproject.presentation.base.View
 
-interface SourceView : BaseView {
+interface SourceView : View {
     fun loadSourceList(listSource: List<Source>)
     fun errorOnLoadSource()
 }
