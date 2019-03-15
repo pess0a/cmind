@@ -22,6 +22,8 @@ class NewsServiceTest {
     private val newsId = "abc-news-au"
     private val page = 1
 
+    // SOME TESTS CAN FAIL BECAUSE IT IS A SERVICE TEST
+
     @Before
     fun setUp() {
         Dispatchers.setMain(mainThreadSurrogate)

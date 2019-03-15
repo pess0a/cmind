@@ -21,6 +21,8 @@ class SourceServiceTest {
     private var repository = NewsRepository(BackendIntegrator.getNewsAPI())
     private lateinit var sourceResponse : SourceResponse
 
+    // SOME TESTS CAN FAIL BECAUSE IT IS A SERVICE TEST
+
     @Before
     fun setUp() {
         Dispatchers.setMain(mainThreadSurrogate)
