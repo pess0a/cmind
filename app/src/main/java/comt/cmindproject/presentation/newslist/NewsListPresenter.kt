@@ -1,5 +1,6 @@
 package comt.cmindproject.presentation.newslist
 
+import android.util.Log
 import comt.cmindproject.infrastructure.CMINDConstants
 import comt.cmindproject.presentation.base.BasePresenter
 import comt.cmindproject.repository.NewsRepository
@@ -10,6 +11,7 @@ import kotlinx.coroutines.launch
 class NewsListPresenter(private var newsRepository: NewsRepository) : BasePresenter<NewsListView> {
 
     private var view: NewsListView? = null
+    private var PAGE : Int = 1
 
     override fun subscribe(view: NewsListView) {
         this.view = view
@@ -19,13 +21,17 @@ class NewsListPresenter(private var newsRepository: NewsRepository) : BasePresen
         this.view = null
     }
 
-    fun getNewsById(newsId : String) {
+    fun getNewsById(newsId: String) {
         GlobalScope.launch(context = Dispatchers.Main) {
             try {
                 view?.showLoading()
-                val newsResponse = newsRepository.getNewsByIdAsync(newsId).await()
+                val newsResponse = newsRepository.getNewsByIdAsync(newsId,PAGE).await()
                 when (newsResponse.status) {
-                    CMINDConstants.OK_RESPONSE -> view?.loadNewsList(newsResponse.articles)
+                    CMINDConstants.OK_RESPONSE ->  {
+                        PAGE += 1
+                        Log.i("logger",PAGE.toString())
+                        view?.loadNewsList(newsResponse.articles)
+                    }
                     CMINDConstants.ERROR_RESPONSE -> view?.errorOnLoadNews()
                     else -> view?.errorOnLoadNews()
                 }

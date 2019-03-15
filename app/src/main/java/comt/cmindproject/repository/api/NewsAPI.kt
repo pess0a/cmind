@@ -9,9 +9,12 @@ import retrofit2.http.Query
 interface NewsAPI {
 
     @GET("sources")
-    fun getSourcesAsync(@Query("apiKey") apiKey : String): Deferred<SourceResponse>
+    fun getSourcesAsync(@Query("apiKey") apiKey: String): Deferred<SourceResponse>
 
     @GET("everything")
-    fun getNewsByIdAsync(@Query("sources") newsId : String, @Query("apiKey") apiKey : String): Deferred<NewsResponse>
+    fun getNewsByIdAsync(
+        @Query("sources") newsId: String, @Query("page") page: Int, @Query("pageSize") pageSize: Int,
+        @Query("apiKey") apiKey: String
+    ): Deferred<NewsResponse>
 
 }

@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import comt.cmindproject.R
-import comt.cmindproject.infrastructure.ImageHelper
 import comt.cmindproject.model.Article
 import kotlinx.android.synthetic.main.item_list_article.view.*
 
 
-class NewsListAdapter(private val context: Context, private var listArticle : List<Article>) : Adapter<NewsListAdapter.ViewHolder>() {
+class NewsListAdapter(private val context: Context, private var listArticle: ArrayList<Article>) :
+    Adapter<NewsListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bindView(listArticle[position])
@@ -28,13 +28,23 @@ class NewsListAdapter(private val context: Context, private var listArticle : Li
 
             title.text = article.title
             description.text = article.description
-            publishedDay.text = article.publishedAt?.substring(0,10)
+            publishedDay.text = article.publishedAt?.substring(0, 10)
             author.text = article.author
 
-            if (article.author.isNullOrBlank()) { author.visibility = View.GONE }
-            if (article.publishedAt.isNullOrBlank()) { publishedDay.visibility = View.GONE }
-            if (!article.urlToImage.isNullOrBlank()) { ImageHelper.loadImage(article.urlToImage,itemView.imageViewThumbnail) }
+            if (article.author.isNullOrBlank()) {
+                author.visibility = View.GONE
+            } else author.visibility = View.VISIBLE
 
+            if (article.publishedAt.isNullOrBlank()) {
+                publishedDay.visibility = View.GONE
+            } else publishedDay.visibility = View.VISIBLE
+
+            if (!article.urlToImage.isNullOrBlank()) {
+                itemView.imageViewThumbnail.visibility = View.VISIBLE
+                itemView.imageViewThumbnail.apply { this.setImageURI(article.urlToImage) }
+            } else {
+                itemView.imageViewThumbnail.visibility = View.GONE
+            }
         }
     }
 
@@ -44,6 +54,11 @@ class NewsListAdapter(private val context: Context, private var listArticle : Li
 
     override fun getItemCount(): Int {
         return listArticle.size
+    }
+
+    fun updateList(listArticle: List<Article>) {
+        this.listArticle.addAll(listArticle)
+        this.notifyDataSetChanged()
     }
 
 

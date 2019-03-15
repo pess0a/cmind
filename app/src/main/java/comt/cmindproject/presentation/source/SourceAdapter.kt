@@ -11,7 +11,8 @@ import comt.cmindproject.model.Source
 import kotlinx.android.synthetic.main.item_list_source.view.*
 
 
-class SourceAdapter(private val context: Context, private var listSource : List<Source>) : Adapter<SourceAdapter.ViewHolder>() {
+class SourceAdapter(private val context: Context, private var listSource: List<Source>) :
+    Adapter<SourceAdapter.ViewHolder>() {
 
 
     lateinit var listener: OnSourceClickItemListener
@@ -42,7 +43,7 @@ class SourceAdapter(private val context: Context, private var listSource : List<
         return listSource.size
     }
 
-    interface OnSourceClickItemListener{
+    interface OnSourceClickItemListener {
         fun onClick(newsId: String) = Unit
     }
 
@@ -51,8 +52,6 @@ class SourceAdapter(private val context: Context, private var listSource : List<
             override fun onClick(newsId: String) = listener(newsId)
         }
     }
-
-
 
 
 }

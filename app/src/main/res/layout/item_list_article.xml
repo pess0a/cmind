@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" xmlns:tools="http://schemas.android.com/tools"
-        android:padding="5dp">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
 
     <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -18,7 +18,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            >
+    >
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -29,16 +29,16 @@
                     android:id="@+id/textViewTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    tools:text="Avião cai com 242 passageiros no Recife"
+                    tools:text="Some big title that fill here"
                     android:layout_marginStart="8dp"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/imageViewThumbnail"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
@@ -54,17 +54,17 @@
                     android:id="@+id/textViewDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Aviãoasdas dsad asdasdasdasdasdasasd asdasdasdasdas "
+                    tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. dsad asdasdasdasdasdasasd asdasdasdasdas "
                     app:layout_constraintTop_toBottomOf="@+id/imageViewThumbnail" android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            />
+                    android:textSize="16sp" android:textStyle="italic"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewAuthor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="autasdasdasdor"
+                    tools:text="https://www.lipsum.com/"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDescription" android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
@@ -73,13 +73,12 @@
                     android:id="@+id/textViewPublished"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="autasdasdasdor"
-                    android:textAlignment="textEnd"
+                    tools:text="date"
+                    android:textAlignment="textStart"
                     app:layout_constraintTop_toBottomOf="@+id/textViewAuthor" android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

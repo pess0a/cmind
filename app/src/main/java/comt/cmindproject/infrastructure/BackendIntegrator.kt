@@ -27,7 +27,7 @@ class BackendIntegrator {
             .client(getOkHttpClient())
             .build()
 
-        fun getNewsAPI() : NewsAPI {
+        fun getNewsAPI(): NewsAPI {
             return provideRetrofit().create(NewsAPI::class.java)
         }
     }

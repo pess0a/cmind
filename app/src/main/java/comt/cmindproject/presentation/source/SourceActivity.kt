@@ -15,8 +15,8 @@ import org.koin.android.ext.android.inject
 
 class SourceActivity : AppCompatActivity(), SourceView {
 
-    private val presenter : SourcePresenter by inject()
-    private lateinit var sourceAdapter : SourceAdapter
+    private val presenter: SourcePresenter by inject()
+    private lateinit var sourceAdapter: SourceAdapter
     private var layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +45,12 @@ class SourceActivity : AppCompatActivity(), SourceView {
 
     override fun loadSourceList(listSource: List<Source>) {
         textViewError.visibility = View.GONE
-        recyclerViewSource.adapter = SourceAdapter(this,listSource).apply {  sourceAdapter = this}
+        recyclerViewSource.adapter = SourceAdapter(this, listSource).apply { sourceAdapter = this }
         recyclerViewSource.layoutManager = layoutManager
 
         sourceAdapter.setSourceClickItemListener {
-            startActivity(Intent(this@SourceActivity,NewsListActivity::class.java).apply {
-                putExtra("newsId",it)
+            startActivity(Intent(this@SourceActivity, NewsListActivity::class.java).apply {
+                putExtra("newsId", it)
             })
         }
     }

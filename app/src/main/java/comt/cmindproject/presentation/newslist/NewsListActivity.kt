@@ -1,36 +1,36 @@
 package comt.cmindproject.presentation.newslist
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import comt.cmindproject.R
-import kotlinx.android.synthetic.main.activity_news_detail.*
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import comt.cmindproject.R
+import comt.cmindproject.infrastructure.EndlessRecyclerViewScrollListener
 import comt.cmindproject.model.Article
+import kotlinx.android.synthetic.main.activity_news_detail.*
 import org.koin.android.ext.android.inject
 
 
 class NewsListActivity : AppCompatActivity(), NewsListView {
 
-    private val presenter : NewsListPresenter by inject()
+    private val presenter: NewsListPresenter by inject()
+    private lateinit var scrollListener: EndlessRecyclerViewScrollListener
     private var layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-    private lateinit var newsId : String
+    private lateinit var newsId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_detail)
         setSupportActionBar(toolbar)
 
-        if (supportActionBar != null) {
-            supportActionBar?.apply {
-                setDisplayHomeAsUpEnabled(true)
-                setDisplayShowHomeEnabled(true)
-            }
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
 
-        if(intent.extras!=null) {
+        if (intent.extras != null) {
             newsId = intent.getStringExtra("newsId")
             supportActionBar?.title = newsId
             presenter.getNewsById(newsId)
@@ -52,17 +52,25 @@ class NewsListActivity : AppCompatActivity(), NewsListView {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun loadNewsList(listArtcles : List<Article>) {
-        textViewError.visibility = View.GONE
-        recyclerViewNews.adapter = NewsListAdapter(this,listArtcles)
-        recyclerViewNews.layoutManager = layoutManager
+    override fun loadNewsList(listArtcles: ArrayList<Article>) {
+        if (recyclerViewNews.adapter==null) {
+            recyclerViewNews.adapter = NewsListAdapter(this, listArtcles)
+            recyclerViewNews.layoutManager = layoutManager
+
+            scrollListener = object : EndlessRecyclerViewScrollListener(layoutManager) {
+                override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                    presenter.getNewsById(newsId)
+                }
+            }
+            recyclerViewNews.addOnScrollListener(scrollListener)
+        } else {
+            (recyclerViewNews.adapter as NewsListAdapter).updateList(listArtcles)
+        }
+
     }
 
     override fun errorOnLoadNews() {
-        textViewError.apply {
-            visibility = View.VISIBLE
-            setOnClickListener { presenter.getNewsById(newsId) }
-        }
+        textViewError.visibility = View.VISIBLE
     }
 
     override fun showLoading() {

@@ -5,5 +5,6 @@ import comt.cmindproject.presentation.base.BaseView
 
 interface NewsListView : BaseView {
     fun errorOnLoadNews()
-    fun loadNewsList(listArtcles : List<Article>)
+    fun loadNewsList(listArtcles: ArrayList<Article>)
+
 }
